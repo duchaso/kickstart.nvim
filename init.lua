@@ -180,6 +180,9 @@ vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' }
 -- vim.keymap.set('n', '<right>', '<cmd>echo "Use l to move!!"<CR>')
 -- vim.keymap.set('n', '<up>', '<cmd>echo "Use k to move!!"<CR>')
 -- vim.keymap.set('n', '<down>', '<cmd>echo "Use j to move!!"<CR>')
+vim.keymap.set('n', '<leader>n', ':lua MiniFiles.open(vim.api.nvim_buf_get_name(0))<CR>', { desc = 'Open file tree explorer' })
+
+vim.keymap.set('n', '<leader>b', ':lua require("buffer_manager.ui").toggle_quick_menu()<CR>', { desc = 'Toggle [B]uffer manager' })
 
 -- Keybinds to make split navigation easier.
 --  Use CTRL+<hjkl> to switch between windows
@@ -247,6 +250,9 @@ require('lazy').setup({
 
   -- "gc" to comment visual regions/lines
   { 'numToStr/Comment.nvim', opts = {} },
+  { 'pocco81/auto-save.nvim', opts = {} },
+  -- { 'rmagatti/auto-session', opts = {} },
+  { 'j-morano/buffer_manager.nvim', dependencies = { 'nvim-lua/plenary.nvim' }, opts = {} },
 
   -- Here is a more advanced example where we pass configuration
   -- options to `gitsigns.nvim`. This is equivalent to the following Lua:
@@ -804,6 +810,7 @@ require('lazy').setup({
       require('mini.surround').setup()
       require('mini.pairs').setup()
       require('mini.cursorword').setup()
+      require('mini.files').setup()
 
       -- Simple and easy statusline.
       --  You could remove this setup call if you don't like it,
